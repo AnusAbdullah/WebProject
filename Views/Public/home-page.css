@@ -1,0 +1,338 @@
+.home-page-home-page {
+    width: 100%;
+    height: 5327px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: transparent;
+    background-color: rgba(255, 255, 255, 1);
+  }
+  .home-page-navigation {
+    top: 76px;
+    left: 307px;
+    width: 926px;
+    height: 163px;
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    align-items: flex-end;
+    flex-shrink: 0;
+    border-color: transparent;
+    justify-content: flex-start;
+  }
+  .home-page-text {
+    top: 5px;
+    left: 357px;
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    position: absolute;
+    font-size: 36px;
+    align-self: auto;
+    font-style: Regular;
+    text-align: left;
+    font-family: Oswald;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .home-page-rectangle {
+    top: 162px;
+    left: 1px;
+    width: 1110px;
+    height: 1px;
+    opacity: 0.50;
+    position: absolute;
+    border-color: rgba(150, 150, 150, 1);
+  }
+  .home-page-post {
+    top: 999px;
+    right: 30px;
+    width: 1107px;
+    height: 1904px;
+    display: flex;
+    padding: 0;
+    position: absolute;
+    align-self: auto;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex-shrink: 1;
+    border-color: transparent;
+    border-style: none;
+    border-width: 0;
+    margin-right: 0;
+    border-radius: 0px 0px 0px 0px;
+    margin-bottom: 3px;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: transparent;
+  }
+  .home-page-pos-copy2 {
+    top: -73px;
+    left: -138px;
+    width: 349px;
+    height: 399px;
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: transparent;
+  }
+  .home-page-rectangle-copy2 {
+    top: 171px;
+    left: 0px;
+    width: 349px;
+    height: 228px;
+    position: absolute;
+    border-color: rgba(150, 150, 150, 1);
+  }
+  .home-page-frame14 {
+    top: 171px;
+    left: 0px;
+    width: 349px;
+    height: 228px;
+    display: flex;
+    padding: 0;
+    position: absolute;
+    align-self: auto;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex-shrink: 1;
+    border-color: transparent;
+    border-style: none;
+    border-width: 0;
+    margin-right: 0;
+    border-radius: 0px 0px 0px 0px;
+    margin-bottom: 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: rgba(104, 104, 104, 1);
+  }
+  .home-page-mask {
+    top: 0px;
+    left: 0px;
+    width: 349px;
+    height: 228px;
+    position: absolute;
+    border-color: rgba(150, 150, 150, 1);
+    border-radius: 3px;
+  }
+  .home-page-tag {
+    top: 0px;
+    left: 0px;
+    width: 94px;
+    height: 33px;
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: transparent;
+  }
+  .home-page-rectangle5 {
+    top: 0px;
+    left: 0px;
+    width: 94px;
+    height: 33px;
+    position: absolute;
+    border-color: rgba(150, 150, 150, 1);
+    border-radius: 3px;
+  }
+  .home-page-text02 {
+    top: 10px;
+    left: 9.5px;
+    color: rgba(42, 42, 42, 1);
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    align-self: auto;
+    font-style: Regular;
+    text-align: center;
+    font-family: Lato;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .home-page-text04 {
+    top: 126px;
+    color: rgba(0, 0, 0, 0.6000000238418579);
+    height: auto;
+    position: absolute;
+    font-size: 12px;
+    align-self: auto;
+    font-style: Bold;
+    text-align: left;
+    font-family: Lato;
+    font-weight: 700;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .home-page-text06 {
+    top: 43px;
+    color: rgba(0, 0, 0, 1);
+    width: 319px;
+    height: auto;
+    position: absolute;
+    font-size: 24px;
+    align-self: auto;
+    font-style: Regular;
+    text-align: left;
+    font-family: Oswald;
+    font-weight: 400;
+    line-height: 32px;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .home-page-download {
+    top: 171px;
+    left: -15px;
+    width: 364px;
+    height: 228px;
+    position: absolute;
+    border-color: transparent;
+  }
+  .home-page-sepatation-copy2 {
+    top: 852px;
+    left: 131px;
+    width: 1112px;
+    height: 73px;
+    display: flex;
+    padding: 0;
+    position: absolute;
+    align-self: auto;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex-shrink: 1;
+    border-color: transparent;
+    border-style: none;
+    border-width: 0;
+    margin-right: 0;
+    border-radius: 0px 0px 0px 0px;
+    margin-bottom: 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: transparent;
+  }
+  .home-page-rectangle7 {
+    top: 36px;
+    left: 2px;
+    width: 1110px;
+    height: 1px;
+    position: absolute;
+    border-color: rgba(150, 150, 150, 1);
+  }
+  .home-page-group10 {
+    top: 0px;
+    left: 0px;
+    width: 183px;
+    height: 73px;
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: transparent;
+  }
+  .home-page-rectangle8 {
+    top: 0px;
+    left: 0px;
+    width: 183px;
+    height: 73px;
+    position: absolute;
+    border-color: rgba(150, 150, 150, 1);
+  }
+  .home-page-text11 {
+    top: 30px;
+    color: rgba(42, 42, 42, 1);
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    align-self: auto;
+    font-style: Regular;
+    text-align: left;
+    font-family: Lato;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .home-page-group1-copy {
+    top: 0px;
+    left: 992px;
+    width: 120px;
+    height: 73px;
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: transparent;
+  }
+  .home-page-rectangle81 {
+    top: 0px;
+    left: 0px;
+    width: 120px;
+    height: 73px;
+    position: absolute;
+    border-color: rgba(150, 150, 150, 1);
+  }
+  .home-page-text13 {
+    top: 30px;
+    left: 35px;
+    color: rgba(68, 192, 254, 1);
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    align-self: auto;
+    font-style: Regular;
+    text-align: right;
+    font-family: Lato;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: underline;
+  }
+  .home-page-text15 {
+    top: 81px;
+    left: 1205px;
+    color: rgba(255, 255, 255, 1);
+    height: auto;
+    position: absolute;
+    font-size: 7px;
+    align-self: auto;
+    font-style: Regular;
+    text-align: left;
+    font-family: Lato;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .home-page-bookdriedflowersaestheticw0kdeb9l1oknqepn {
+    top: 194px;
+    left: -1px;
+    width: 1459px;
+    height: 640px;
+    position: absolute;
+    border-color: transparent;
+  }
+  
