@@ -10,6 +10,7 @@ const user = sequelize.define("user", {
   bookname: {
     type: Sequelize.STRING(40),
     allowNull: false,
+    defaultValue: "Not Specified",
   },
   author: {
     type: Sequelize.STRING(40),
@@ -24,11 +25,11 @@ const user = sequelize.define("user", {
     allowNull: false,
   },
   image: {
-    type: Sequelize.BLOB('long'),
+    type: Sequelize.BLOB("long"),
     allowNull: false,
   },
   bookpdf: {
-    type: Sequelize.BLOB('long'),
+    type: Sequelize.BLOB("long"),
     allowNull: false,
   },
 });
