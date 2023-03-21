@@ -1,11 +1,12 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../DB/Connection");
 
-const user = sequelize.define("user", {
+const user = sequelize.define("books", {
   isbn: {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
+    isInt: true,
   },
   bookname: {
     type: Sequelize.STRING(40),
@@ -23,6 +24,7 @@ const user = sequelize.define("user", {
   linktobuy: {
     type: Sequelize.STRING(30),
     allowNull: false,
+    isUrl: true,
   },
   image: {
     type: Sequelize.BLOB("long"),

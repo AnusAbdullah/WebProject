@@ -7,6 +7,7 @@ const u_reviewsRoute = require("./Routes/U_Reviews");
 const commentsRoute = require("./Routes/Comments");
 const path = require("path");
 const bodyParser = require("body-parser");
+
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/books", booksRoute);
@@ -25,7 +26,7 @@ const start = async () => {
   try {
     await sequelize.authenticate();
     console.log("connected to db...");
-    await sequelize.sync({ force: false });
+    await sequelize.sync({ force: true });
     app.listen(port, () => {
       console.log(`server listening on port http://localhost:${port}...`);
     });
