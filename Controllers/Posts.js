@@ -1,107 +1,105 @@
-const admin = require("../Model/Admin.js");
-
-const addAdmin = (req, res, next) => {
-    const { id,name,email,password } =
+const Posts = require("../Model/Posts.js");
+const addPosts = (req, res, next) => {
+    const { id,u_name,genre,review } =
       req.body;
   
-    admin
+      Posts
       .create({
         id: id,
-        name: name,
-        email: email,
-        password: password
+        u_name: u_name,
+        genre: genre,
+        review: review
       })
       .then((data) => {
         res.send(data);
       })
       .catch((err) => {
         res.status(500).send({
-          message: err.message || "Some error occurred while creating the new admin.",
+          message: err.message || "Some error occurred while creating new Post.",
         });
       });
 };
 
-const updateAdmin = (req, res, next) => {
-    const { id,name,email,password } =
+const updatePosts = (req, res, next) => {
+    const { id,u_name,genre,review } =
       req.body;
   
-    admin
+      Posts
       .update(
         {
             id: id,
-            name: name,
-            email: email,
-            password: password
+            u_name: u_name,
+            genre: genre,
+            review: review
         },
         { where: { id: id } }
       )
       .then((num) => {
         if (num == 1) {
           res.send({
-            message: "Admin was updated successfully!",
+            message: "Posts was updated successfully!",
           });
         } else {
           res.send({
-            message: `Cannot update Admin with id=${id}. Admin was not found!`,
+            message: `Cannot update Posts with id=${id}. Posts was not found!`,
           });
         }
       })
       .catch((err) => {
         res.status(500).send({
-          message: "Could not update Admin with id=" + id,
+          message: "Could not update Posts with id=" + id,
         });
       });
 };
 
-const deleteAdmin = (req, res, next) => {
+const deletePosts = (req, res, next) => {
     const { id } = req.body;
   
-    admin
+    Posts
       .destroy({
         where: { id: id },
       })
       .then((num) => {
         if (num == 1) {
           res.send({
-            message: "Admin was deleted successfully!",
+            message: "Posts was deleted successfully!",
           });
         } else {
           res.send({
-            message: `Cannot delete Admin with id=${id}. Admin was not found!`,
+            message: `Cannot delete Posts with id=${id}. Posts was not found!`,
           });
         }
       })
       .catch((err) => {
         res.status(500).send({
-          message: "Could not delete Admin with id=" + id,
+          message: "Could not delete Posts with id=" + id,
         });
       });
   };
 
-  const findAdmin = (req, res, next) => {
+  const findPosts = (req, res, next) => {
     const { id } = req.body;
-    admin
+    Posts
       .findByPk(id)
       .then((data) => {
         if (data) {
           res.send(data);
         } else {
           res.status(404).send({
-            message: `Cannot find Admin with id=${id}.`,
+            message: `Cannot find Posts with id=${id}.`,
           });
         }
       })
       .catch((err) => {
         res.status(500).send({
-          message: "Error retrieving Admin with id=" + id,
+          message: "Error retrieving Posts with id=" + id,
         });
       });
   };
-  
+
   module.exports = {
-    findAdmin,
-    deleteAdmin,
-    updateAdmin,
-    addAdmin,
+    addPosts,
+    updatePosts,
+    deletePosts,
+    findPosts,
   };
-  
