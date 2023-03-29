@@ -11,7 +11,9 @@ const {
 const router = express.Router();
 
 router
-  .get("/",findU_Review)
-  .post("/",addU_Review)
-  .put("/",updateU_Review)
-  .delete("/",deleteU_Review);
+  .get("/", findU_Review)
+  .post("/", addU_Review)
+  .put("/", updateU_Review)
+  .delete("/", deleteU_Review);
+
+module.exports = router;

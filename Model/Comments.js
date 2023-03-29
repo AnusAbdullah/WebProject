@@ -12,13 +12,7 @@ const cmnts = sequelize.define("comments", {
   comment: {
     type: Sequelize.STRING(200),
     allowNull: false,
-  },
-  u_id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    allowNull: false,
-    foriegnKey: true,
-  },
+  }
 
 });
 

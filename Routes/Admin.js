@@ -15,3 +15,5 @@ router
   .post("/", addAdmin)
   .put("/", updateAdmin)
   .delete("/", deleteAdmin);
+
+module.exports = router;

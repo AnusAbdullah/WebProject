@@ -15,3 +15,5 @@ router
   .post("/", addCmnts)
   .put("/", updateCmnts)
   .delete("/", deleteCmnts);
+
+module.exports = router;

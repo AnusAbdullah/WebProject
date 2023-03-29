@@ -1,42 +1,90 @@
 const user = require("../Model/User.js");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-const addUser = (req, res, next) => {
-  const { id, fname, lname, email, password } = req.body;
+const addUser = async (req, res, next) => {
+  const { fname, lname, email, password } = req.body;
+
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
 
   // console.log(cname, cemail, cpassword, caddress);
-  user
-    .create({
-      id: id,
+  try {
+    user.create({
       fname: fname,
       lname: lname,
       email: email,
-      password: password,
-    })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the User.",
-      });
+      password: hashedPassword,
+    });
+    res.send({
+      fname: fname,
+      lname: lname,
+      email: email,
+      password: hashedPassword,
+    });
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the User.",
+    });
+  }
+};
+
+const SignIn = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Check if user exists
+    const User = await user.findOne({ email });
+    if (!User) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    // Check if password is correct
+    const isMatch = await bcrypt.compare(password, User.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign({ id: User._id }, "mysecretkey", {
+      expiresIn: "300s",
     });
 
-  //   console.log("User created");
-  //   res.render("login-signin", { data: "sign-up successfully" });
+    res.json({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
-  // } catch (error) {
-  //   // console.log(error);
-  // //   res.render("login-signin", { data: "email already exist" });
-  // }
+const validateToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(token, "mysecretkey");
+    req.UserId = decoded.id;
+    next();
+  } catch (error) {
+    console.error(error);
+    res.status(401).json({ message: "Invalid token" });
+  }
+};
+
+const Profile = (req, res) => {
+  res.json({ message: "You are authenticated!" });
 };
 
 const deleteUser = (req, res, next) => {
-  const { id } = req.body;
+  const { email } = req.body;
 
-  // console.log(cname, cemail, cpassword, caddress);
   user
     .destroy({
-      where: { id: id },
+      where: { email: email },
     })
     .then((num) => {
       if (num == 1) {
@@ -45,31 +93,30 @@ const deleteUser = (req, res, next) => {
         });
       } else {
         res.send({
-          message: `Cannot delete User with id=${id}. Maybe User was not found!`,
+          message: `Cannot delete User with username=${email}. Maybe User was not found!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not delete User with id=" + id,
+        message: "Could not delete User with username=" + email,
       });
     });
 };
 
 const updateUser = (req, res, next) => {
-  const { id, fname, lname, email, password } = req.body;
+  const { fname, lname, email, password } = req.body;
 
   // console.log(cname, cemail, cpassword, caddress);
   user
     .update(
       {
-        id: id,
         fname: fname,
         lname: lname,
         email: email,
         password: password,
       },
-      { where: { id: id } }
+      { where: { email: email } }
     )
     .then((num) => {
       if (num == 1) {
@@ -78,22 +125,15 @@ const updateUser = (req, res, next) => {
         });
       } else {
         res.send({
-          message: `Cannot update User with id=${id}. Maybe User was not found!`,
+          message: `Cannot update User with username=${email}. Maybe User was not found!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not update User with id=" + id,
+        message: "Could not update User with username=" + email,
       });
     });
-  //   console.log("User created");
-  //   res.render("login-signin", { data: "sign-up successfully" });
-
-  // } catch (error) {
-  //   // console.log(error);
-  // //   res.render("login-signin", { data: "email already exist" });
-  // }
 };
 
 const findUser = (req, res, next) => {
@@ -107,21 +147,15 @@ const findUser = (req, res, next) => {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find User with id=${id}.`,
+          message: `Cannot find User with username=${email}.`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving User with id=" + id,
+        message: "Error retrieving User with username=" + email,
       });
-    }); //   console.log("User created");
-  //   res.render("login-signin", { data: "sign-up successfully" });
-
-  // } catch (error) {
-  //   // console.log(error);
-  // //   res.render("login-signin", { data: "email already exist" });
-  // }
+    });
 };
 
 module.exports = {
@@ -129,4 +163,7 @@ module.exports = {
   updateUser,
   deleteUser,
   findUser,
+  SignIn,
+  Profile,
+  validateToken,
 };

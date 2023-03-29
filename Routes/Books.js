@@ -15,3 +15,5 @@ router
   .post("/", addbook)
   .put("/", updatebook)
   .delete("/", deletebook);
+
+module.exports = router;

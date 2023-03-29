@@ -15,3 +15,5 @@ router
   .post("/", addPosts)
   .put("/", updatePosts)
   .delete("/", deletePosts);
+
+module.exports = router;

@@ -24,13 +24,7 @@ const addbook = (req, res, next) => {
       });
     });
 
-  //   console.log("User created");
-  //   res.render("login-signin", { data: "sign-up successfully" });
-
-  // } catch (error) {
-  //   // console.log(error);
-  // //   res.render("login-signin", { data: "email already exist" });
-  // }
+  
 };
 
 const deletebook = (req, res, next) => {
