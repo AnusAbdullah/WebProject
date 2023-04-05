@@ -9,11 +9,12 @@ const u_reviewsRoute = require("./Routes/U_Reviews");
 const commentsRoute = require("./Routes/Comments");
 const path = require("path");
 const bodyParser = require("body-parser");
+const notfound = require("./middlewares/notfound");
 
 app.set("view engine", "ejs"); // set the view engine to ejs
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+// app.use([express.json(), express.static('./public')]);
 const publicPath = path.join(__dirname, "public");
 app.use(express.static(publicPath));
 
@@ -22,6 +23,7 @@ app.use("/admin", adminRoute);
 app.use("/books", booksRoute);
 app.use("/u_reviews", u_reviewsRoute);
 app.use("/comments", commentsRoute);
+app.use("*", notfound);
 
 const port = 5000;
 const start = async () => {

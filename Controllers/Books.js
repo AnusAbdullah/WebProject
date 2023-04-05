@@ -23,8 +23,6 @@ const addbook = (req, res, next) => {
         message: err.message || "Some error occurred while creating the Book.",
       });
     });
-
-  
 };
 
 const deletebook = (req, res, next) => {
@@ -124,9 +122,51 @@ const findbook = (req, res, next) => {
   // }
 };
 
+const allbooks = (req, res, next) => {
+  const { isbn } = req.body;
+
+  // console.log(cname, cemail, cpassword, caddress);
+  books
+    .findAll()
+    .then((data) => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Cannot find Books`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving Books",
+      });
+    }); 
+};
+
+const viewbooks = async (req, res) => {
+  let { page, bookname, author, publisher } = req.query;
+
+  let book = await books.findAll({
+    where: {
+      bookname: bookname ? { [Op.like]: `%${bookname}%` } : { [Op.ne]: null },
+      author: author ? { [Op.like]: `%${author}%` } : { [Op.ne]: null },
+      publisher: publisher
+        ? { [Op.like]: `%${publisher}%` }
+        : { [Op.ne]: null },
+    },
+    // order: sort ? sortFilter.map((attri) => [attri, sorder]) : null,
+    limit: 5,
+    offset: (Number(page) - 1) * 5,
+  });
+  res.status(200).json({ length: book.length, book });
+};
+
 module.exports = {
   addbook,
   updatebook,
   deletebook,
   findbook,
+  viewbooks,
+  allbooks
 };

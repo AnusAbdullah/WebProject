@@ -3,7 +3,7 @@ const sequelize = require("../DB/Connection");
 
 const user = sequelize.define("books", {
   isbn: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING(50),
     allowNull: false,
     primaryKey: true,
     isInt: true,
@@ -18,11 +18,11 @@ const user = sequelize.define("books", {
     allowNull: false,
   },
   publisher: {
-    type: Sequelize.STRING(20),
+    type: Sequelize.STRING(40),
     allowNull: false,
   },
   linktobuy: {
-    type: Sequelize.STRING(30),
+    type: Sequelize.STRING(100),
     allowNull: false,
     isUrl: true,
   },

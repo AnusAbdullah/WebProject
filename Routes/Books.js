@@ -6,6 +6,8 @@ const {
   updatebook,
   deletebook,
   findbook,
+  viewbooks,
+  allbooks,
 } = require("../Controllers/Books");
 
 const router = express.Router();
@@ -15,5 +17,7 @@ router
   .post("/", addbook)
   .put("/", updatebook)
   .delete("/", deletebook);
+router.route("/all").get(allbooks);
+router.route("/viewproducts").get(viewbooks);
 
 module.exports = router;
