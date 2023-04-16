@@ -10,11 +10,11 @@ const posts = sequelize.define("posts", {
       primaryKey: true,
     },
     u_name: {
-      type: Sequelize.STRING(20),
+      type: Sequelize.STRING(50),
       allowNull: false,
     },
     genre: {
-        type: Sequelize.STRING(40),
+        type: Sequelize.STRING(50),
         allowNull: false,
         defaultValue: "Not Specified",
     },
