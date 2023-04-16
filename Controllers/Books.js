@@ -1,6 +1,9 @@
 const books = require("../Model/Books.js");
+const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 
-const addbook = (req, res, next) => {
+
+const addbook = catchAsyncErrors((req, res, next) => {
+
   const { isbn, bookname, author, publisher, linktobuy, image, bookpdf } =
     req.body;
 
@@ -23,9 +26,9 @@ const addbook = (req, res, next) => {
         message: err.message || "Some error occurred while creating the Book.",
       });
     });
-};
+});
 
-const deletebook = (req, res, next) => {
+const deletebook = catchAsyncErrors((req, res, next) => {
   const { isbn } = req.body;
 
   // console.log(cname, cemail, cpassword, caddress);
@@ -49,9 +52,9 @@ const deletebook = (req, res, next) => {
         message: "Could not delete Book with id=" + id,
       });
     });
-};
+});
 
-const updatebook = (req, res, next) => {
+const updatebook = catchAsyncErrors((req, res, next) => {
   const { isbn, bookname, author, publisher, linktobuy, image, bookpdf } =
     req.body;
 
@@ -85,16 +88,9 @@ const updatebook = (req, res, next) => {
         message: "Could not update Books with id=" + id,
       });
     });
-  //   console.log("User created");
-  //   res.render("login-signin", { data: "sign-up successfully" });
+});
 
-  // } catch (error) {
-  //   // console.log(error);
-  // //   res.render("login-signin", { data: "email already exist" });
-  // }
-};
-
-const findbook = (req, res, next) => {
+const findbook = catchAsyncErrors((req, res, next) => {
   const { isbn } = req.body;
 
   // console.log(cname, cemail, cpassword, caddress);
@@ -113,19 +109,10 @@ const findbook = (req, res, next) => {
       res.status(500).send({
         message: "Error retrieving Books with id=" + id,
       });
-    }); //   console.log("User created");
-  //   res.render("login-signin", { data: "sign-up successfully" });
+    }); 
+});
 
-  // } catch (error) {
-  //   // console.log(error);
-  // //   res.render("login-signin", { data: "email already exist" });
-  // }
-};
-
-const allbooks = (req, res, next) => {
-  const { isbn } = req.body;
-
-  // console.log(cname, cemail, cpassword, caddress);
+const allbooks = catchAsyncErrors((req, res, next) => {
   books
     .findAll()
     .then((data) => {
@@ -141,10 +128,10 @@ const allbooks = (req, res, next) => {
       res.status(500).send({
         message: "Error retrieving Books",
       });
-    }); 
-};
+    });
+});
 
-const viewbooks = async (req, res) => {
+const viewbooks = catchAsyncErrors(async (req, res) => {
   let { page, bookname, author, publisher } = req.query;
 
   let book = await books.findAll({
@@ -160,7 +147,7 @@ const viewbooks = async (req, res) => {
     offset: (Number(page) - 1) * 5,
   });
   res.status(200).json({ length: book.length, book });
-};
+});
 
 module.exports = {
   addbook,
@@ -168,5 +155,5 @@ module.exports = {
   deletebook,
   findbook,
   viewbooks,
-  allbooks
+  allbooks,
 };

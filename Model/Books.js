@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../DB/Connection");
 
-const user = sequelize.define("books", {
+const books = sequelize.define("books", {
   isbn: {
     type: Sequelize.STRING(50),
     allowNull: false,
@@ -36,4 +36,4 @@ const user = sequelize.define("books", {
   },
 });
 
-module.exports = user;
+module.exports = books;

@@ -2,10 +2,11 @@
 const user = require("../Model/User.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 
 // Function to add a new user to the database
-const addUser = async (req, res, next) => {
-   // Get the user data from the request body
+const addUser = catchAsyncErrors(async (req, res, next) => {
+  // Get the user data from the request body
   const { fname, lname, email, password } = req.body;
 
   // Hash the password using bcrypt
@@ -29,22 +30,22 @@ const addUser = async (req, res, next) => {
       password: hashedPassword,
     });
   } catch (err) {
-     // If there's an error, send a response with an error message
+    // If there's an error, send a response with an error message
     res.status(500).send({
       message: err.message || "Some error occurred while creating the User.",
     });
   }
-};
+});
 
 // Function to sign in a user and generate a JWT token
-const SignIn = async (req, res) => {
+const SignIn = catchAsyncErrors(async (req, res) => {
   const { email, password } = req.body;
 
   try {
     // Check if the user exists in the database
-    const User = await user.findOne({ email });
+    const User = await user.findOne({ where: { email: email } });
     if (!User) {
-       // If the user doesn't exist, send an error response
+      // If the user doesn't exist, send an error response
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
@@ -65,9 +66,9 @@ const SignIn = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Server error" });
   }
-};
+});
 // Middleware function to validate a JWT token
-const validateToken = (req, res, next) => {
+const validateToken = catchAsyncErrors((req, res, next) => {
   // Get the authorization header from the request
   const authHeader = req.headers.authorization;
   if (!authHeader) {
@@ -85,18 +86,18 @@ const validateToken = (req, res, next) => {
     // Call the next middleware function
     next();
   } catch (error) {
-     // If the token is invalid, send an error response
+    // If the token is invalid, send an error response
     console.error(error);
     res.status(401).json({ message: "Invalid token" });
   }
-};
+});
 
 // Function to send a response indicating the user is authenticated
-const Profile = (req, res) => {
+const Profile = catchAsyncErrors((req, res) => {
   res.json({ message: "You are authenticated!" });
-};
+});
 
-const deleteUser = (req, res, next) => {
+const deleteUser = catchAsyncErrors((req, res, next) => {
   const { email } = req.body;
 
   user
@@ -119,9 +120,9 @@ const deleteUser = (req, res, next) => {
         message: "Could not delete User with username=" + email,
       });
     });
-};
+});
 
-const updateUser = (req, res, next) => {
+const updateUser = catchAsyncErrors((req, res, next) => {
   const { fname, lname, email, password } = req.body;
 
   // console.log(cname, cemail, cpassword, caddress);
@@ -151,9 +152,9 @@ const updateUser = (req, res, next) => {
         message: "Could not update User with username=" + email,
       });
     });
-};
+});
 
-const findUser = (req, res, next) => {
+const findUser = catchAsyncErrors((req, res, next) => {
   const { id } = req.body;
 
   // console.log(cname, cemail, cpassword, caddress);
@@ -173,7 +174,29 @@ const findUser = (req, res, next) => {
         message: "Error retrieving User with username=" + email,
       });
     });
-};
+});
+
+const allUser = catchAsyncErrors((req, res, next) => {
+  // const { id } = req.body;
+
+  // console.log(cname, cemail, cpassword, caddress);
+  user
+    .findAll()
+    .then((data) => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Cannot find Users`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving Users",
+      });
+    });
+});
 
 module.exports = {
   addUser,
@@ -183,4 +206,5 @@ module.exports = {
   SignIn,
   Profile,
   validateToken,
+  allUser,
 };

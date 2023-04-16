@@ -8,17 +8,9 @@ const user = sequelize.define("user_review", {
     allowNull: false,
     primaryKey: true,
   },
-  bookname: {
-    type: Sequelize.STRING(40),
-    allowNull: false,
-    defaultValue: "Not Specified",
-  },
+  
   review: {
     type: Sequelize.STRING(1000),
-    allowNull: false,
-  },
-  image: {
-    type: Sequelize.BLOB("long"),
     allowNull: false,
   },
   stars: {
