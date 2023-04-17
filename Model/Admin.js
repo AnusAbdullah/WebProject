@@ -10,7 +10,7 @@ const admin = sequelize.define("admin", {
     primaryKey: true,
   },
   name: {
-    type: Sequelize.STRING(20),
+    type: Sequelize.STRING(50),
     allowNull: false,
   },
   email: {
@@ -20,7 +20,7 @@ const admin = sequelize.define("admin", {
     isEmail: true,
   },
   password: {
-    type: Sequelize.STRING(20),
+    type: Sequelize.STRING(50),
     allowNull: false,
   },
 });

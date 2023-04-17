@@ -3,26 +3,26 @@ const sequelize = require("../DB/Connection");
 
 const books = sequelize.define("books", {
   isbn: {
-    type: Sequelize.STRING(50),
+    type: Sequelize.BIGINT(75),
     allowNull: false,
     primaryKey: true,
     isInt: true,
   },
   bookname: {
-    type: Sequelize.STRING(40),
+    type: Sequelize.STRING(100),
     allowNull: false,
     defaultValue: "Not Specified",
   },
   author: {
-    type: Sequelize.STRING(40),
+    type: Sequelize.STRING(100),
     allowNull: false,
   },
   publisher: {
-    type: Sequelize.STRING(40),
+    type: Sequelize.STRING(100),
     allowNull: false,
   },
   linktobuy: {
-    type: Sequelize.STRING(100),
+    type: Sequelize.STRING(2048),
     allowNull: false,
     isUrl: true,
   },

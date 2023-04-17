@@ -9,15 +9,15 @@ const user = sequelize.define("user", {
     primaryKey: true,
   },
   fname: {
-    type: Sequelize.STRING(10),
+    type: Sequelize.STRING(50),
     allowNull: false,
   },
   lname: {
-    type: Sequelize.STRING(10),
+    type: Sequelize.STRING(50),
     allowNull: false,
   },
   email: {
-    type: Sequelize.STRING(50),
+    type: Sequelize.STRING(100),
     allowNull: false,
     unique: true,
     isEmail: true,
