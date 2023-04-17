@@ -6,6 +6,7 @@ const {
   updatePosts,
   deletePosts,
   findPosts,
+  allPosts,
 } = require("../Controllers/Posts");
 
 const router = express.Router();
@@ -15,5 +16,5 @@ router
   .post("/", addPosts)
   .put("/", updatePosts)
   .delete("/", deletePosts);
-
+router.get("/all", allPosts);
 module.exports = router;

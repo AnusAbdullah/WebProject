@@ -6,6 +6,7 @@ const {
   updateCmnts,
   deleteCmnts,
   findCmnts,
+  allCmnts,
 } = require("../Controllers/Comments");
 
 const router = express.Router();
@@ -15,5 +16,5 @@ router
   .post("/", addCmnts)
   .put("/", updateCmnts)
   .delete("/", deleteCmnts);
-
+router.get("/all", allCmnts);
 module.exports = router;

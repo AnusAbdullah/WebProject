@@ -17,7 +17,8 @@ router
   .post("/", addbook)
   .put("/", updatebook)
   .delete("/", deletebook);
-router.route("/all").get(allbooks);
-router.route("/viewproducts").get(viewbooks);
 
+router.get("/all", allbooks);
+// router.route("/viewproducts").get(viewbooks);
+router.get("/viewproducts", viewbooks);
 module.exports = router;
