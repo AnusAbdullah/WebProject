@@ -22,13 +22,16 @@ const addUser = catchAsyncErrors(async (req, res, next) => {
       email: email,
       password: hashedPassword,
     });
-    // Send a response with the user data
-    res.send({
+
+    const data = {
       fname: fname,
       lname: lname,
       email: email,
       password: hashedPassword,
-    });
+    };
+    // const response = await testing(fname, lname, email);
+    // Send a response with the user data
+    res.json({ data: data });
   } catch (err) {
     // If there's an error, send a response with an error message
     res.status(500).send({

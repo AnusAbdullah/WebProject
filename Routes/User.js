@@ -20,4 +20,5 @@ router
 
 router.get("/signin", SignIn);
 router.get("/profile", validateToken, Profile);
+
 module.exports = router;
