@@ -5,7 +5,7 @@ const {
   updateUser,
   deleteUser,
   findUser,
-  SignIn,
+  signIn,
   Profile,
   validateToken,
 } = require("../Controllers/User");
@@ -18,7 +18,7 @@ router
   .put("/", updateUser)
   .delete("/", deleteUser);
 
-router.get("/signin", SignIn);
-router.get("/profile", validateToken, Profile);
+router.get("/signin", signIn);
+// router.get("/profile", validateToken, Profile);
 
 module.exports = router;

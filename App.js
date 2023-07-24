@@ -34,8 +34,9 @@ const publicPath = path.join(__dirname, "public");
 app.use(express.static(publicPath));
 
 app.get("/", function (req, res) {
-  res.render("index");
+  res.render("login_signUP");
 });
+
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/books", booksRoute);

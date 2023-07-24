@@ -1,5 +1,6 @@
 // Require the necessary modules and models
 const user = require("../Model/User.js");
+const admin = require("../Model/Admin.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
@@ -10,8 +11,8 @@ const addUser = catchAsyncErrors(async (req, res, next) => {
   const { fname, lname, email, password } = req.body;
 
   // Hash the password using bcrypt
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
+  // const salt = await bcrypt.genSalt(10);
+  // const hashedPassword = await bcrypt.hash(password, salt);
 
   // console.log(cname, cemail, cpassword, caddress);
   try {
@@ -20,18 +21,19 @@ const addUser = catchAsyncErrors(async (req, res, next) => {
       fname: fname,
       lname: lname,
       email: email,
-      password: hashedPassword,
+      password: password,
     });
 
     const data = {
       fname: fname,
       lname: lname,
       email: email,
-      password: hashedPassword,
+      password: password,
     };
     // const response = await testing(fname, lname, email);
     // Send a response with the user data
-    res.json({ data: data });
+    // res.json({ data: data });
+    res.render("login_signUP", { data: data });
   } catch (err) {
     // If there's an error, send a response with an error message
     res.status(500).send({
@@ -40,36 +42,68 @@ const addUser = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
-// Function to sign in a user and generate a JWT token
-const SignIn = catchAsyncErrors(async (req, res) => {
+const signIn = async (req, res) => {
+
   const { email, password } = req.body;
-
-  try {
-    // Check if the user exists in the database
-    const User = await user.findOne({ where: { email: email } });
-    if (!User) {
-      // If the user doesn't exist, send an error response
-      return res.status(400).json({ message: "Invalid credentials" });
+ 
+  console.log("Email", email, "Password", password);
+ 
+  const getUser = await user.findOne({
+    where: { email: email },
+  });
+  const getadmin = await admin.findOne({
+    where: { email: email },
+  });
+  console.log(getUser);
+  console.log(getadmin);
+  if (getUser == null && getadmin == null) {
+    res.render("login_signUP", { data: "user not found" });
+  } else if (getUser != null) {
+    if (getUser.email === email && getUser.password === password) {
+      username = getUser.name;
+      res.send({ data: "User Found" });
+      // res.render("cdasboard", {
+      //   data: username,
+      // });
     }
-
-    // Check if password is correct
-    const isMatch = await bcrypt.compare(password, User.password);
-    if (!isMatch) {
-      // If the password is incorrect, send an error response
-      return res.status(400).json({ message: "Invalid credentials" });
+  } else if (getadmin != null) {
+    if (getadmin.email === email && getadmin.password === password) {
+      username = getadmin.name;
+      res.send({ data: "User Found" });
     }
-
-    // If the user exists and the password is correct, generate a JWT token
-    const token = jwt.sign({ id: User._id }, "mysecretkey", {
-      expiresIn: "300s",
-    });
-    // Send the JWT token in the response
-    res.json({ token });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
   }
-});
+};
+
+// Function to sign in a user and generate a JWT token
+// const SignIn = catchAsyncErrors(async (req, res) => {
+//   const { email, password } = req.body;
+
+//   try {
+//     // Check if the user exists in the database
+//     const User = await user.findOne({ where: { email: email } });
+//     if (!User) {
+//       // If the user doesn't exist, send an error response
+//       return res.status(400).json({ message: "Invalid credentials" });
+//     }
+
+//     // Check if password is correct
+//     const isMatch = await bcrypt.compare(password, User.password);
+//     if (!isMatch) {
+//       // If the password is incorrect, send an error response
+//       return res.status(400).json({ message: "Invalid credentials" });
+//     }
+
+//     // If the user exists and the password is correct, generate a JWT token
+//     const token = jwt.sign({ id: User._id }, "mysecretkey", {
+//       expiresIn: "300s",
+//     });
+//     // Send the JWT token in the response
+//     res.json({ token });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Server error" });
+//   }
+// });
 // Middleware function to validate a JWT token
 const validateToken = catchAsyncErrors((req, res, next) => {
   // Get the authorization header from the request
@@ -206,7 +240,7 @@ module.exports = {
   updateUser,
   deleteUser,
   findUser,
-  SignIn,
+  signIn,
   Profile,
   validateToken,
   allUser,
